@@ -3,8 +3,8 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 --------------------------------------------------------------------------------------------------------------------------------------------
 local Window = Fluent:CreateWindow({
-    Title = "Tên Hub",
-    SubTitle = "by Tên Thằng Skid",
+    Title = "VOID Hub",
+    SubTitle = "Made by Xenon",
     TabWidth = 160,
     Size = UDim2.fromOffset(450, 300),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
@@ -4683,7 +4683,7 @@ end
 
 
 
-_G.FastAttackDelay = 0.13
+_G.FastAttackDelay = 0.10
 
     local Client = game.Players.LocalPlayer
     local STOP = require(Client.PlayerScripts.CombatFramework.Particle)
@@ -4849,6 +4849,42 @@ ToggleRemove:OnChanged(function(Value)
             end
         end
         end)
+
+
+
+local ToggleRemoveNotify =
+    Tabs.Setting:AddToggle("ToggleRemoveNotify", {Title = " Enable Remove All Notify", Default = false})
+ToggleRemoveNotify:OnChanged(
+    function(Value)
+        RemoveNotify = Value
+    end
+)
+Options.ToggleRemoveNotify:SetValue(false)
+
+spawn(
+    function()
+        while wait() do
+            if RemoveNotify then
+                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+            else
+                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+            end
+        end
+    end
+)
+
+local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
+ToggleWhite:OnChanged(
+    function(Value)
+        _G.WhiteScreen = Value
+        if _G.WhiteScreen == true then
+            game:GetService("RunService"):Set3dRenderingEnabled(false)
+        elseif _G.WhiteScreen == false then
+            game:GetService("RunService"):Set3dRenderingEnabled(true)
+        end
+    end
+)
+Options.ToggleWhite:SetValue(false)
 
 
 
